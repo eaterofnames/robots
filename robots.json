@@ -1,0 +1,62 @@
+{
+  "robot001": {
+    "name": "robot001",
+    "model": "modelA",
+    "status": "idle",
+    "firmware_version": "0.1.0",
+    "deployed": true,
+    "gpu": "A100",
+    "IMU": "VN100",
+    "cameras": "IDS"
+  },
+  "robot002": {
+    "name": "robot002",
+    "model": "modelA",
+    "status": "idle",
+    "firmware_version": "0.1.0",
+    "deployed": true,
+    "gpu": "A100",
+    "IMU": "VN100",
+    "cameras": "IDS"
+  },
+  "robot003": {
+    "name": "robot003",
+    "model": "modelB",
+    "status": "idle",
+    "firmware_version": "0.1.1",
+    "deployed": false,
+    "gpu": "A100",
+    "IMU": "VN100",
+    "cameras": "IDS"
+  },
+  "robot004": {
+    "name": "robot004",
+    "model": "modelC",
+    "status": "idle",
+    "firmware_version": "0.1.2",
+    "deployed": false,
+    "gpu": "A100",
+    "IMU": "VN100",
+    "cameras": "IDS"
+  },
+  "robot005": {
+    "name": "robot005",
+    "model": "modelD",
+    "status": "idle",
+    "firmware_version": "0.1.0",
+    "deployed": false,
+    "gpu": "A100",
+    "IMU": "VN100",
+    "cameras": "IDS"
+  },
+  "robot006": {
+    "name": "robot006",
+    "model": "modelE",
+    "status": "idle",
+    "firmware_version": "0.1.1",
+    "deployed": false,
+    "gpu": "A100",
+    "IMU": "VN100",
+    "cameras": "IDS"
+  }
+}
