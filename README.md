@@ -1,7 +1,3 @@
-## Robots 
-
-Robots is a tool for managing a fleet of robots.
-
 # Robots CLI
 
 The Robots CLI is a tool for managing a fleet of robots.
