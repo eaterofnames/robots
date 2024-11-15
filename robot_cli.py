@@ -73,7 +73,7 @@ def main():
         edit_args = {
             'model': args.model,
             'status': args.status,
-            'firmware_version': args.firmware,
+            'hostname': args.hostname,
             'deployed': args.deployed
         }
         # Add dynamic aspects to edit_args

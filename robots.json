@@ -3,7 +3,7 @@
     "name": "robot001",
     "model": "modelA",
     "hostname": "stonks.local",
-    "status": "idle",
+    "status": "DEV",
     "deployed": true,
     "gpu": "A100",
     "IMU": "VN100",
