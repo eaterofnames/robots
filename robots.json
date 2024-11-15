@@ -2,61 +2,73 @@
   "robot001": {
     "name": "robot001",
     "model": "modelA",
+    "hostname": "stonks.local",
     "status": "idle",
-    "firmware_version": "0.1.0",
     "deployed": true,
     "gpu": "A100",
     "IMU": "VN100",
-    "cameras": "IDS"
+    "cameras": "IDS",
+    "customer": "None",
+    "CPU": "aarch64"
   },
   "robot002": {
     "name": "robot002",
     "model": "modelA",
+    "hostname": "0.1.0",
     "status": "idle",
-    "firmware_version": "0.1.0",
-    "deployed": true,
+    "deployed": false,
     "gpu": "A100",
     "IMU": "VN100",
-    "cameras": "IDS"
+    "cameras": "IDS",
+    "customer": "google",
+    "CPU": "aarch64"
   },
   "robot003": {
     "name": "robot003",
     "model": "modelB",
+    "hostname": "0.1.1",
     "status": "idle",
-    "firmware_version": "0.1.1",
     "deployed": false,
     "gpu": "A100",
     "IMU": "VN100",
-    "cameras": "IDS"
+    "cameras": "IDS",
+    "customer": "None",
+    "CPU": "aarch64"
   },
   "robot004": {
     "name": "robot004",
     "model": "modelC",
+    "hostname": "0.1.2",
     "status": "idle",
-    "firmware_version": "0.1.2",
     "deployed": false,
     "gpu": "A100",
     "IMU": "VN100",
-    "cameras": "IDS"
+    "cameras": "IDS",
+    "customer": "None",
+    "CPU": "aarch64"
   },
   "robot005": {
     "name": "robot005",
     "model": "modelD",
+    "hostname": "0.1.0",
     "status": "idle",
-    "firmware_version": "0.1.0",
     "deployed": false,
     "gpu": "A100",
     "IMU": "VN100",
-    "cameras": "IDS"
+    "cameras": "IDS",
+    "customer": "None",
+    "CPU": "aarch64"
   },
   "robot006": {
     "name": "robot006",
     "model": "modelE",
+    "hostname": "0.1.1",
     "status": "idle",
-    "firmware_version": "0.1.1",
     "deployed": false,
     "gpu": "A100",
     "IMU": "VN100",
-    "cameras": "IDS"
+    "cameras": "IDS",
+    "customer": "None",
+    "CPU": "aarch64"
   }
 }

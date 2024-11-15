@@ -35,7 +35,7 @@ def main():
     edit_parser.add_argument('name', help='Name of the robot')
     edit_parser.add_argument('--model', help='Update robot model')
     edit_parser.add_argument('--status', help='Update robot status')
-    edit_parser.add_argument('--firmware', help='Update firmware version')
+    edit_parser.add_argument('--hostname', help='Update hostname')
     edit_parser.add_argument('--deployed', help='Update deployment status (true/false)')
     edit_parser.add_argument('--aspect', '-a', action='append', nargs=2,
                            metavar=('NAME', 'VALUE'),

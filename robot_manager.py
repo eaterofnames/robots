@@ -1,7 +1,7 @@
 from robot import Robot
 import json
 import os
-import inspect
+from tabulate import tabulate
 
 class RobotManager:
     def __init__(self):
@@ -80,7 +80,6 @@ class RobotManager:
             print("No robots match the specified filters")
             return
             
-        print("\nRobots:")
         
         # Get all unique custom aspects across all robots
         custom_aspects = set()
@@ -89,38 +88,36 @@ class RobotManager:
                 custom_aspects.update(robot.aspects.keys())
         
         # Create header
-        headers = ["Name", "Model", "Status", "Firmware"]
+        headers = ["Name", "Model", "Hostname", "Status"]
         if detailed and custom_aspects:
             headers.extend(sorted(custom_aspects))
         
-        # Print header
-        print("-" * (len(headers) * 12))
-        header_format = "%-10s" * len(headers)
-        print(header_format % tuple(headers))
-        print("-" * (len(headers) * 12))
-        
-        # Print each robot
+        # Build rows to add to the table
+        listed_robots = []
         for name, robot in filtered_robots.items():
+            # make deployed robots pretty
             color = GREEN if robot.deployed else GREY
-            
-            # Start with core values
+
+            # core values first
             values = [
-                f"{color}{name:<10}{RESET}",
-                f"{robot.model:<10}",
-                f"{robot.status:<10}",
-                f"{robot.firmware_version:<10}"
+                f"{color}{name}{RESET}",
+                f"{robot.model}",
+                f"{robot.hostname}",
+                f"{robot.status}",
             ]
-            
-            # Add custom aspects if in detailed mode
-            if detailed and custom_aspects:
+
+            # if we're in detailed mode, add custom aspects
+            if detailed and  custom_aspects:
                 for aspect in sorted(custom_aspects):
                     values.append(str(robot.aspects.get(aspect, '-')))
             
-            # Print the row
-            row_format = "%-10s" * len(values)
-            print(row_format % tuple(values))
+            # add this to the table to be printed
+            listed_robots.append(values)
         
-        print()
+        # Output printing from list_robots
+        print("\nRobots:")
+        print(tabulate(listed_robots, headers))
+
     
     def add_aspect(self, aspect_name, default_value=None):
         """Add a new aspect to all robots"""

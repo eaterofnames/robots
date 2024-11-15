@@ -1,11 +1,12 @@
 class Robot:
-    def __init__(self, name, model, status="idle", firmware_version="0.1.0", deployed=False, **aspects):
+    def __init__(self, name, model, hostname, status="idle", deployed=False, **aspects):
+        # Core attributes are ones the user cannot change
         self.name = name
         self.model = model
+        self.hostname = hostname
         self.status = status
-        self.firmware_version = firmware_version
         self.deployed = deployed
-        self._core_attributes = {'name', 'model', 'status', 'firmware_version', 'deployed'}
+        self._core_attributes = {'name', 'model', 'hostname', 'status', 'deployed'}
         # Store dynamic aspects
         self.aspects = aspects if aspects else {}
         
@@ -37,8 +38,8 @@ class Robot:
         data = {
             "name": self.name,
             "model": self.model,
+            "hostname": self.hostname,
             "status": self.status,
-            "firmware_version": self.firmware_version,
             "deployed": self.deployed
         }
         # Add dynamic aspects
