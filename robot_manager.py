@@ -22,15 +22,15 @@ class RobotManager:
         with open(self.data_file, 'w') as f:
             json.dump(data, f, indent=2)
     
-    def create_robot(self, name, model):
+    def create_robot(self, name, model, hostname):
         """Create a new robot"""
         if name in self.robots:
             print(f"Error: Robot '{name}' already exists")
             return
         
-        self.robots[name] = Robot(name=name, model=model)
+        self.robots[name] = Robot(name=name, model=model, hostname=hostname)
         self._save_robots()
-        print(f"Robot '{name}' (model: {model}) created successfully")
+        print(f"Robot '{name}' (model: {model}, hostname: {hostname}) created successfully")
     
     def inspect_robot(self, name):
         """Display robot configuration details"""

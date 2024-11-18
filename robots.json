@@ -70,5 +70,19 @@
     "cameras": "IDS",
     "customer": "None",
     "CPU": "aarch64"
+  },
+  "robot007": {
+    "name": "robot007",
+    "model": "modelN",
+    "hostname": "stonks.local",
+    "status": "idle",
+    "deployed": false
+  },
+  "robot008": {
+    "name": "robot008",
+    "model": "modelR",
+    "hostname": "stonks.local",
+    "status": "idle",
+    "deployed": false
   }
 }

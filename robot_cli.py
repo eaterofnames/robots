@@ -2,18 +2,21 @@
 import argparse
 import sys
 from robot_manager import RobotManager
+from robot_connector import RobotConnector
 
 def main():
     manager = RobotManager()
+    connector = RobotConnector()
     
-    parser = argparse.ArgumentParser(description='Robot Fleet Management System')
+    parser = argparse.ArgumentParser(description='Robot Fleet Management Tool')
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
     
     # Create command
     create_parser = subparsers.add_parser('create', help='Create a new robot')
     create_parser.add_argument('name', help='Name of the robot')
     create_parser.add_argument('model', help='Model of the robot')
-    
+    create_parser.add_argument('hostname', help='Hostname of the robot')
+
     # Inspect command
     inspect_parser = subparsers.add_parser('inspect', help='Inspect robot details')
     inspect_parser.add_argument('name', help='Name of the robot')
@@ -52,10 +55,15 @@ def main():
     remove_aspect_parser.add_argument('--force', '-f', action='store_true', 
                                     help='Skip confirmation prompt')
     
+    # Connect command
+    connect_parser = subparsers.add_parser('connect', help='Connect to a robot via SSH')
+    connect_parser.add_argument('name', help='Name of the robot to connect to')
+    connect_parser.add_argument('--remote_command', '-c', help='Command to run on the robot')
+    
     args = parser.parse_args()
     
     if args.command == 'create':
-        manager.create_robot(args.name, args.model)
+        manager.create_robot(args.name, args.model, args.hostname)
     elif args.command == 'inspect':
         manager.inspect_robot(args.name)
     elif args.command == 'status':
@@ -94,6 +102,13 @@ def main():
                 print("Operation cancelled")
                 return
         manager.remove_aspect(args.name)
+    elif args.command == 'connect':
+        if args.name not in manager.robots:
+            print(f"Error: Robot '{args.name}' not found")
+            sys.exit(1)
+        robot = manager.robots[args.name]
+        print(f"Connecting to {args.name} via hostname:{robot.hostname}...")
+        connector.connect(robot.hostname, args.remote_command)
     else:
         parser.print_help()
         sys.exit(1)

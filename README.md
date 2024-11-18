@@ -40,6 +40,9 @@ robot006  modelE    idle      0.1.1     VN100     IDS       A100
 ### Remove Aspect
 `remove-aspect <name> [--force]` - Remove an aspect from all robots. Use the `--force` option to skip the confirmation prompt.
 
+### Connect
+`connect <name> [--command <cmd>]` - Connect to a robot via SSH using its hostname. Optionally run a command on the robot.
+
 ## Options
 
 ### Filter
