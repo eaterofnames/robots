@@ -75,14 +75,14 @@
     "name": "robot007",
     "model": "modelN",
     "hostname": "stonks.local",
-    "status": "idle",
+    "status": "DEV",
     "deployed": false
   },
   "robot008": {
     "name": "robot008",
     "model": "modelR",
     "hostname": "stonks.local",
-    "status": "idle",
+    "status": "DEV",
     "deployed": false
   }
 }

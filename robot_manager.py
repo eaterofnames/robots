@@ -55,8 +55,8 @@ class RobotManager:
         print(f"\nRobot: {name}")
         print(f"Status: {robot.status}")
     
-    def list_robots(self, filters=None, detailed=False):
-        """List all registered robots and their status with optional filters"""
+    def list_robots(self, filters=None, detailed=False, sort_by=None):
+        """List all registered robots and their status with optional filters and sorting"""
         if not self.robots:
             print("No robots registered")
             return
@@ -80,7 +80,6 @@ class RobotManager:
             print("No robots match the specified filters")
             return
             
-        
         # Get all unique custom aspects across all robots
         custom_aspects = set()
         if detailed:
@@ -107,17 +106,30 @@ class RobotManager:
             ]
 
             # if we're in detailed mode, add custom aspects
-            if detailed and  custom_aspects:
+            if detailed and custom_aspects:
                 for aspect in sorted(custom_aspects):
                     values.append(str(robot.aspects.get(aspect, '-')))
             
             # add this to the table to be printed
             listed_robots.append(values)
+
+        # Sort the robots if sort_by is specified
+        if sort_by:
+            try:
+                # Get the index of the sort column
+                if sort_by in ['name', 'model', 'hostname', 'status']:
+                    sort_idx = headers.index(sort_by.capitalize())
+                else:
+                    sort_idx = headers.index(sort_by)
+                
+                # Sort the robots list
+                listed_robots.sort(key=lambda x: str(x[sort_idx]).lower())
+            except ValueError:
+                print(f"Warning: Cannot sort by '{sort_by}' - aspect not found")
         
-        # Output printing from list_robots
+        # Output printing
         print("\nRobots:")
         print(tabulate(listed_robots, headers))
-
     
     def add_aspect(self, aspect_name, default_value=None):
         """Add a new aspect to all robots"""

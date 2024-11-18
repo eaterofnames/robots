@@ -32,6 +32,7 @@ def main():
                            help='Filter by any aspect (can be used multiple times)')
     list_parser.add_argument('--detailed', '-d', action='store_true',
                             help='Show detailed view including all aspects')
+    list_parser.add_argument('--sort', '-s', help='Sort robots by specified aspect')
     
     # Edit command
     edit_parser = subparsers.add_parser('edit', help='Edit robot attributes')
@@ -76,7 +77,7 @@ def main():
                 if aspect_name == 'deployed':
                     value = value.lower() == 'true'
                 filters[aspect_name] = value
-        manager.list_robots(filters, detailed=args.detailed)
+        manager.list_robots(filters, detailed=args.detailed, sort_by=args.sort)
     elif args.command == 'edit':
         edit_args = {
             'model': args.model,
