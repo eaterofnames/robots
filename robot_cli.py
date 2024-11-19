@@ -1,12 +1,24 @@
 #!/usr/bin/env python3
 import argparse
 import sys
+import tomllib
 from robot_manager import RobotManager
 from robot_connector import RobotConnector
 
 def main():
     manager = RobotManager()
-    connector = RobotConnector()
+    
+    # Load config from fleet-config.toml
+    config = {}
+    try:
+        with open('fleet-config.toml', 'rb') as f:
+            config = tomllib.load(f)
+    except FileNotFoundError:
+        print("Warning: fleet-config.toml not found, using default settings")
+    except Exception as e:
+        print(f"Warning: Error loading fleet-config.toml: {e}")
+        
+    connector = RobotConnector(config)
     
     parser = argparse.ArgumentParser(description='Robot Fleet Management Tool')
     subparsers = parser.add_subparsers(dest='command', help='Available commands')

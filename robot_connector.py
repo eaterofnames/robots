@@ -2,6 +2,17 @@ import subprocess
 
 
 class RobotConnector:   
+    def __init__(self, config=None):
+        """Initialize RobotConnector with optional config
+        
+        Args:
+            config: Configuration dictionary containing rsync-options
+        """
+        self.config = config or {}
+        self.rsync_options = self.config.get('rsync-options')
+        self.ssh_user = self.config.get('ssh-user', 'default_user')
+        self.ssh_key_path = self.config.get('ssh-key-path', '/path/to/default/key')
+            
     def connect(self, hostname, remote_command=None):
         """Establish SSH connection to robot"""
         if not hostname:
@@ -10,11 +21,16 @@ class RobotConnector:
             
         try:
             print(f"Connecting to {hostname}...")
+
+            # Create ssh_options from config values:
+            ssh_options = ['-o', f'User={self.ssh_user}', '-o', f'IdentityFile={self.ssh_key_path}']
+            
+            # Run a command as well if it was provided
             if remote_command:
                 print(f"Running command: {remote_command}")
-                subprocess.run(['ssh', hostname, remote_command], check=True)
+                subprocess.run(['ssh'] + ssh_options + [hostname, remote_command], check=True)
             else:
-                subprocess.run(['ssh', hostname], check=True)
+                subprocess.run(['ssh'] + ssh_options + [hostname], check=True)
             return True
         except subprocess.CalledProcessError:
             print(f"Failed to connect to {hostname}")
@@ -49,13 +65,8 @@ class RobotConnector:
                 source = source_path
                 dest = f"{hostname}:{dest_path}"
                 
-            subprocess.run([
-                'rsync',
-                '-avz',  # archive mode, verbose, compress
-                '--progress',  # show progress during transfer
-                source,
-                dest
-            ], check=True)
+            cmd = ['rsync'] + self.rsync_options + [source, dest]
+            subprocess.run(cmd, check=True)
             return True
         except subprocess.CalledProcessError:
             print(f"Failed to transfer files {direction} {hostname}")
