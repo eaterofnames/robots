@@ -61,6 +61,18 @@ def main():
     connect_parser.add_argument('name', help='Name of the robot to connect to')
     connect_parser.add_argument('--remote_command', '-c', help='Command to run on the robot')
     
+    # Push command
+    push_parser = subparsers.add_parser('push', help='Push files to a robot using rsync')
+    push_parser.add_argument('name', help='Name of the robot')
+    push_parser.add_argument('source_dir', help='Local source directory to push from')
+    push_parser.add_argument('dest_dir', help='Remote destination directory on the robot')
+    
+    # Pull command
+    pull_parser = subparsers.add_parser('pull', help='Pull files from a robot using rsync')
+    pull_parser.add_argument('name', help='Name of the robot')
+    pull_parser.add_argument('source_dir', help='Remote source directory on the robot')
+    pull_parser.add_argument('dest_dir', help='Local destination directory to pull to')
+    
     args = parser.parse_args()
     
     if args.command == 'create':
@@ -110,6 +122,18 @@ def main():
         robot = manager.robots[args.name]
         print(f"Connecting to {args.name} via hostname:{robot.hostname}...")
         connector.connect(robot.hostname, args.remote_command)
+    elif args.command == 'push':
+        if args.name not in manager.robots:
+            print(f"Error: Robot '{args.name}' not found")
+            sys.exit(1)
+        robot = manager.robots[args.name]
+        connector.transfer(robot.hostname, args.source_dir, args.dest_dir, pull=False)
+    elif args.command == 'pull':
+        if args.name not in manager.robots:
+            print(f"Error: Robot '{args.name}' not found")
+            sys.exit(1)
+        robot = manager.robots[args.name]
+        connector.transfer(robot.hostname, args.source_dir, args.dest_dir, pull=True)
     else:
         parser.print_help()
         sys.exit(1)
