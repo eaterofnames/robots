@@ -6,15 +6,14 @@ The Robots CLI is a tool for managing a fleet of robots.
 $ ./robot_cli.py list --detailed
 
 Robots:
-------------------------------------------------------------------------------------
-Name      Model     Status    Firmware  IMU       cameras   gpu
-------------------------------------------------------------------------------------
-robot001  modelA    idle      0.1.0     VN100     IDS       A100
-robot002  modelA    idle      0.1.0     VN100     IDS       A100
-robot003  modelB    idle      0.1.1     VN100     IDS       A100
-robot004  modelC    idle      0.1.2     VN100     IDS       A100
-robot005  modelD    idle      0.1.0     VN100     IDS       A100
-robot006  modelE    idle      0.1.1     VN100     IDS       A100
+Name      Model    Hostname      Status    CPU      IMU    cameras    gpu
+--------  -------  ------------  --------  -------  -----  ---------  -----
+robot001  modelA   stonks.local  DEV       aarch64  VN100  IDS        A100
+robot002  modelA   0.1.0         idle      aarch64  VN100  IDS        A100
+robot003  modelB   0.1.1         idle      aarch64  VN100  IDS        A100
+robot004  modelC   0.1.2         idle      aarch64  VN100  IDS        A100
+robot005  modelD   0.1.0         idle      aarch64  VN100  IDS        A100
+robot006  modelE   0.1.1         idle      aarch64  VN100  IDS        A100
 ```
 
 ## Available Commands
