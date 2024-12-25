@@ -51,3 +51,15 @@ $ robots push robot001 /path/to/local/dir /path/to/robot/dir
 ## Configuration
 
 `robots` uses a `fleet-config.toml` file to store fleet-wide configuration settings, such as ssh and rsync options.
+
+## Feature List
+
+Here's what I want to add over time:
+
+1. Robots is multi-user. Some sort of remotely hosted fleet-config and robot database will be needed for this.
+2. Robots has a web interface, preferably hosted from the same place as above.
+3. Robots is logging interactions that users make.
+4. Robots has an API for the robots themselves to report their status and other information.
+5. Robots supports build definitions for robots, which can be used to build a deployment payload for a robot.
+6. Robots supports a deployment system that can be used to deploy the above build payload to a robot.
+7. Robots has a pull-based system for fetching built releases down to robots.
