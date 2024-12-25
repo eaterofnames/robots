@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "robots-cli"
+version = "0.1.0"
+description = "A tool for managing a fleet of robots"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "click",
+    "tabulate",
+    "tomli; python_version < '3.11'",  # tomllib is built-in for Python 3.11+
+]
+
+[project.scripts]
+robots = "robots.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["robots"] 

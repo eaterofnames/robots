@@ -1,9 +1,11 @@
-# Virtual Environment
+# Virtual Environment stuff
 venv/
 env/
 .env/
 .venv/
 pyvenv.cfg
+bin/
+lib/
 
 # Python cache files
 __pycache__/
