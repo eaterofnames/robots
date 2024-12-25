@@ -12,62 +12,42 @@ robot001  modelA   stonks.local  DEV       aarch64  VN100  IDS        A100
 robot002  modelA   0.1.0         idle      aarch64  VN100  IDS        A100
 robot003  modelB   0.1.1         idle      aarch64  VN100  IDS        A100
 robot004  modelC   0.1.2         idle      aarch64  VN100  IDS        A100
-robot005  modelD   0.1.0         idle      aarch64  VN100  IDS        A100
-robot006  modelE   0.1.1         idle      aarch64  VN100  IDS        A100
 ```
 
-## Available Commands
+## What is it?
 
-### Create
+`robots` at its core is an abstraction of linux commands coupled with a table of robots. A fleet manager may find themselves performing these actions:
 
-`create <name> <model>` - Create a new robot with the specified name and model.
+- Create a new robot entry (can also be thought of as 'registering' the robot).
+- Add aspects to robots, such as a camera model, firmware version, GPU, etc.
+- Edit a robots aspects as upgrades or component replacements occur.
+- Connect to a robot and run a command on it.
+- Transfer files between a robot and the local machine.
+- Get the status of a robot.
 
-### Inspect
+`robots` aims to make these faster, and allow lower-level robot managers to be abstracted away from the robot users.
 
-`inspect <name>` - Display detailed information about a robot, including its configuration and aspects.
+## Installation
 
-### Status
+1. Clone the repository: `git clone https://github.com/eaterofnames/robots.git`
+2. Get inside a venv of your choice. We're using `python -m venv robots`.
+3. Change into the repo directory: `cd robots`
+4. Use pip: `pip install -e .`
 
-`status <name>` - Get the current status of a robot.
+## Usage
 
-### List
+`robots` is a CLI tool. It's built with `click` and `toml`. After installation, you can run `robots` to see the help menu.
 
-`list` - List all registered robots. Optional filters can be applied using the `--filter` option.
+Some basic commands to get you started:
 
-### Edit
+```shell
+$ robots list
+$ robots create robot001 modelA stonks.local
+$ robots edit robot001 model=modelB status=idle
+$ robots connect robot001
+$ robots push robot001 /path/to/local/dir /path/to/robot/dir
+```
 
-`edit <name>` - Edit a robot's attributes, including its model, status, firmware version, and deployment status. Additional aspects can be updated using the `--aspect` option.
+## Configuration
 
-### Add Aspect
-
-`add-aspect <name> [--default <value>]` - Add a new aspect to all robots. A default value can be specified using the `--default` option.
-
-### Remove Aspect
-
-`remove-aspect <name> [--force]` - Remove an aspect from all robots. Use the `--force` option to skip the confirmation prompt.
-
-### Connect
-
-`connect <name> [--command <cmd>]` - Connect to a robot via SSH using its hostname. Optionally run a command on the robot.
-
-## Options
-
-### Filter
-
-`--filter <aspect> <value>` - Filter robots by a specific aspect and value. Can be used multiple times.
-
-### Sort
-
-`--sort <aspect>` - Sort the robot list by the specified aspect.
-
-### Detailed
-
-`--detailed` - Show a detailed view of robots, including all aspects.
-
-### Aspect
-
-`--aspect <name> <value>` - Update an aspect value for a robot.
-
-### Force
-
-`--force` - Skip confirmation prompts.
+`robots` uses a `fleet-config.toml` file to store fleet-wide configuration settings, such as ssh and rsync options.
