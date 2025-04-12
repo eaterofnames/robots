@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "robots-cli"
+name = "robots"
 version = "0.1.0"
 description = "A tool for managing a fleet of robots"
 readme = "README.md"
@@ -12,10 +12,18 @@ dependencies = [
     "click",
     "tabulate",
     "tomli; python_version < '3.11'",  # tomllib is built-in for Python 3.11+
+    "flask>=3.0.0",
+    "flask-sqlalchemy>=3.1.0",
+    "flask-migrate>=4.0.0",
+    "psycopg2-binary>=2.9.0",
+    "python-dotenv>=1.0.0",
+    "flask-oauthlib>=0.9.6",
+    "alembic>=1.13.0",  # For database migrations
 ]
+
 
 [project.scripts]
 robots = "robots.cli:cli"
 
 [tool.hatch.build.targets.wheel]
-packages = ["robots"] 
+packages = ["robots"]

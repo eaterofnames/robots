@@ -4,7 +4,7 @@ Robot Manager
 Handles robot creation, inspection, listing, editing, and aspect management
 """
 
-from robots.robot import Robot
+from robots.models.robot import Robot
 import json
 import os
 from tabulate import tabulate
@@ -60,6 +60,7 @@ class RobotManager:
         robot = self.robots[name]
         print(f"\nRobot: {name}")
         print(f"Status: {robot.status}")
+        print(f"Location: {robot.location}")
     
     def list_robots(self, filters=None, detailed=False, sort_by=None):
         """List all registered robots and their status with optional filters and sorting"""
@@ -93,7 +94,7 @@ class RobotManager:
                 custom_aspects.update(robot.aspects.keys())
         
         # Create header
-        headers = ["Name", "Model", "Hostname", "Status"]
+        headers = ["Name", "Model", "Hostname", "Status", "Location"]
         if detailed and custom_aspects:
             headers.extend(sorted(custom_aspects))
         
@@ -109,6 +110,7 @@ class RobotManager:
                 f"{robot.model}",
                 f"{robot.hostname}",
                 f"{robot.status}",
+                f"{robot.location}"
             ]
 
             # if we're in detailed mode, add custom aspects
@@ -123,7 +125,7 @@ class RobotManager:
         if sort_by:
             try:
                 # Get the index of the sort column
-                if sort_by in ['name', 'model', 'hostname', 'status']:
+                if sort_by in ['name', 'model', 'hostname', 'status', 'location']:
                     sort_idx = headers.index(sort_by.capitalize())
                 else:
                     sort_idx = headers.index(sort_by)

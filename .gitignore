@@ -22,6 +22,23 @@ wheels/
 .installed.cfg
 *.egg
 
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Database
+*.db
+*.sqlite3
+
 # Project specific
 robots.json
 pyvenv.cfg

@@ -9,7 +9,8 @@
     "IMU": "VN100",
     "cameras": "IDS",
     "customer": "None",
-    "CPU": "aarch64"
+    "CPU": "aarch64",
+    "battery-level": "100"
   },
   "robot002": {
     "name": "robot002",
@@ -21,7 +22,8 @@
     "IMU": "VN100",
     "cameras": "IDS",
     "customer": "google",
-    "CPU": "aarch64"
+    "CPU": "aarch64",
+    "battery-level": "100"
   },
   "robot003": {
     "name": "robot003",
@@ -33,7 +35,8 @@
     "IMU": "VN100",
     "cameras": "IDS",
     "customer": "None",
-    "CPU": "aarch64"
+    "CPU": "aarch64",
+    "battery-level": "100"
   },
   "robot004": {
     "name": "robot004",
@@ -45,7 +48,8 @@
     "IMU": "VN100",
     "cameras": "IDS",
     "customer": "None",
-    "CPU": "aarch64"
+    "CPU": "aarch64",
+    "battery-level": "100"
   },
   "robot005": {
     "name": "robot005",
@@ -57,7 +61,8 @@
     "IMU": "VN100",
     "cameras": "IDS",
     "customer": "None",
-    "CPU": "aarch64"
+    "CPU": "aarch64",
+    "battery-level": "100"
   },
   "robot006": {
     "name": "robot006",
@@ -69,6 +74,15 @@
     "IMU": "VN100",
     "cameras": "IDS",
     "customer": "None",
-    "CPU": "aarch64"
+    "CPU": "aarch64",
+    "battery-level": "100"
+  },
+  "test-robot": {
+    "name": "test-robot",
+    "model": "model1",
+    "hostname": "hostname1",
+    "status": "idle",
+    "deployed": false,
+    "battery-level": "100"
   }
 }
