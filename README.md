@@ -27,16 +27,40 @@ robot004  modelC   0.1.2         idle      aarch64  VN100  IDS        A100
 
 `robots` aims to make these faster, and allow lower-level robot managers to be abstracted away from the robot users.
 
-## Installation
+## Installation - CLI utility
 
 1. Clone the repository: `git clone https://github.com/eaterofnames/robots.git`
 2. Get inside a venv of your choice. We're using `python -m venv robots`.
 3. Change into the repo directory: `cd robots`
 4. Use pip: `pip install -e .`
 
+## Installation - Backend
+
+The backend requires a PostgreSQL database which is provided via Docker. Here's how to set it up:
+
+1. Make sure you have Docker and Docker Compose installed on your system.
+
+2. The database configuration is managed through `fleet-config.toml`. The default configuration is:
+   ```toml
+   DATABASE_URL="postgresql://robots:robots@localhost:5432/robots"
+   SQLALCHEMY_TRACK_MODIFICATIONS = "False"
+   ```
+
+3. Start the database container:
+   ```shell
+   docker-compose up -d
+   ```
+
+4. Verify the database is running:
+   ```shell
+   docker-compose ps
+   ```
+
+The database will be queryable via `robots list`. See below for more.
+
 ## Usage
 
-`robots` is a CLI tool. It's built with `click` and `toml`. After installation, you can run `robots` to see the help menu.
+`robots` is a CLI tool. It's built with `click` and `toml`. After installation, you can run `robots` to see the help menu. It relies on a database, right now that's hosted in a docker container for development.
 
 Some basic commands to get you started:
 

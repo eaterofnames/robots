@@ -62,7 +62,24 @@ def create(name, model, hostname):
                 print(f"Error: Robot '{name}' already exists")
                 return
             
-            robot = Robot(name=name, model=model, hostname=hostname)
+            # Get or create default user
+            # This is temporary until we implement Auth.
+            default_user = User.query.filter_by(email='default@robots.local').first()
+            if not default_user:
+                default_user = User(
+                    oauth_id='default',
+                    email='default@robots.local',
+                    name='Default User'
+                )
+                db.session.add(default_user)
+                db.session.commit()
+            
+            robot = Robot(
+                name=name, 
+                model=model, 
+                hostname=hostname,
+                user_id=default_user.id
+            )
             db.session.add(robot)
             db.session.commit()
             print(f"Created robot '{name}'")

@@ -5,13 +5,23 @@ Database initialization
 from flask import Flask
 from flask_migrate import Migrate
 from robots.models.base import db
-from robots.db.config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_TRACK_MODIFICATIONS
+import sys
 
 def init_db(app: Flask):
     """Initialize database with Flask app"""
+    # Load TOML config based on Python version
+    if sys.version_info >= (3, 11):
+        import tomllib
+        with open('fleet-config.toml', 'rb') as f:
+            config = tomllib.load(f)
+    else:
+        import tomli
+        with open('fleet-config.toml', 'rb') as f:
+            config = tomli.load(f)
+
     # Configure SQLAlchemy
-    app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
+    app.config['SQLALCHEMY_DATABASE_URI'] = config['DATABASE_URL']
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['SQLALCHEMY_TRACK_MODIFICATIONS']
 
     # Initialize extensions
     db.init_app(app)
