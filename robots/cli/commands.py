@@ -14,6 +14,16 @@ from flask import Flask
 from sqlalchemy.exc import OperationalError
 from contextlib import contextmanager
 
+# Load configuration
+config = {}
+try:
+    with open('robots/config/fleet-config.toml', 'rb') as f:
+        config = tomllib.load(f)
+except FileNotFoundError:
+    print("\033[91mWarning: fleet-config.toml not found, all settings will be default\033[0m")
+except Exception as e:
+    print(f"\033[91mWarning: Error loading fleet-config.toml: {e}\033[0m")
+
 @contextmanager
 def handle_db_connection():
     """Context manager to handle database connection errors gracefully."""
@@ -29,19 +39,9 @@ def handle_db_connection():
 
 # Create a minimal Flask app for database operations
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://robots:robots@localhost:5432/robots'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = config['DATABASE_URL']
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['SQLALCHEMY_TRACK_MODIFICATIONS']
 db.init_app(app)
-
-# Load configuration
-config = {}
-try:
-    with open('robots/config/fleet-config.toml', 'rb') as f:
-        config = tomllib.load(f)
-except FileNotFoundError:
-    print("\033[91mWarning: fleet-config.toml not found, all settings will be default\033[0m")
-except Exception as e:
-    print(f"\033[91mWarning: Error loading fleet-config.toml: {e}\033[0m")
     
 connector = RobotConnector(config)
 
@@ -145,7 +145,7 @@ def list(filter, detailed, sort):
                 headers = ["Robot", "Model", "Status", "Location"]
             else:
                 headers = [
-                    "Name", 
+                    "Robot", 
                     "Model", 
                     "Hostname",
                     "Status",
@@ -179,8 +179,8 @@ def list(filter, detailed, sort):
                         row[0] = click.style(robot.name, fg='green')
                 table.append(row)
             
+            print("\nRobots:")
             if detailed:
-                print("\nRobots:")
                 print(tabulate(table, headers, tablefmt="simple"))
             else:
                 print(tabulate(table, headers, tablefmt="simple"))

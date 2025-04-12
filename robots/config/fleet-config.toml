@@ -9,3 +9,19 @@ rsync-options = [
 # Config values I want to support but haven't implemented yet:
 # valid-models = ["modelA", "modelB", "modelC", "modelD", "modelE"]
 # robot-states = ["building", "idle", "charging", "broken", "development", "archived"]
+
+# Database configuration
+DATABASE_URL="postgresql://robots:robots@localhost:5432/robots"
+SQLALCHEMY_TRACK_MODIFICATIONS = "False"
+
+# Flask configuration
+FLASK_APP="robots.app"
+FLASK_ENV="development"
+FLASK_DEBUG=1
+
+# OAuth Configuration - Auth isn't implemented yet.
+# OAUTH_CLIENT_ID="your-client-id"
+# OAUTH_CLIENT_SECRET=your-client-secret
+# OAUTH_AUTHORIZE_URL=https://oauth-provider.com/oauth/authorize
+# OAUTH_TOKEN_URL=https://oauth-provider.com/oauth/token
+# OAUTH_USERINFO_URL=https://oauth-provider.com/oauth/userinfo 
